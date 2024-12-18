@@ -3,25 +3,26 @@
 # Function to install curl and download the reinstall script
 install_and_download() {
   local install_cmd="$1"
+  # Install curl using the provided installation command
   $install_cmd curl && curl -O https://raw.githubusercontent.com/bin456789/reinstall/main/reinstall.sh
 }
 
 # Function to show menu and execute reinstall command
 choose_and_reinstall() {
   echo "Choose OS to reinstall:"
-  echo "1) Debian 12"
-  echo "2) Debian 11"
-  echo "3) Ubuntu 22.04"
-  echo "4) Ubuntu 20.04"
+  echo "1) Debian 11"
+  echo "2) Debian 12"
+  echo "3) Ubuntu 20.04"
+  echo "4) Ubuntu 22.04"
   echo "5) Windows 7"
   echo "6) Windows 10"
   echo "7) Windows 11"
   read -p "Enter choice [1-7]: " choice
   case $choice in
-    1) bash reinstall.sh debian 12 --password daffaHelmi@12s ;;
-    2) bash reinstall.sh debian 11 --password daffaHelmi@12s ;;
-    3) bash reinstall.sh ubuntu 22.04 --password daffaHelmi@12s ;;
-    4) bash reinstall.sh ubuntu 20.04 --password daffaHelmi@12s ;;
+    1) bash reinstall.sh debian 11 --password daffaHelmi@12s ;;
+    2) bash reinstall.sh debian 12 --password daffaHelmi@12s ;;
+    3) bash reinstall.sh ubuntu 20.04 --password daffaHelmi@12s ;;
+    4) bash reinstall.sh ubuntu 22.04 --password daffaHelmi@12s ;;
     5) bash reinstall.sh windows \
          --image-name 'Windows 7 Ultimate' \
          --lang en-us --password daffaHelmi@12s ;;
@@ -54,5 +55,6 @@ elif [ -f /etc/alpine-release ]; then
 else
   echo "Unsupported operating system. This script works only on Debian, Ubuntu, CentOS, Fedora, Arch, Alpine, or similar distributions."
   echo "However, you can use options 5, 6, or 7 for Windows installation if supported."
+  # Bypass curl installation for unsupported Linux distributions
   choose_and_reinstall
 fi
